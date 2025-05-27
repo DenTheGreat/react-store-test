@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback, useRef } from 'react'
-import { fetchProducts } from '../api/api'
-import type { Product } from '../types/product'
+import {useCallback, useEffect, useRef, useState} from 'react'
+import {fetchProducts} from '../api/api'
+import type {Product} from '../types/product'
 import ProductCard from './ProductCard'
-import { useSearch } from '../context/SearchContext'
+import {useSearch} from '../context/SearchContext'
 
 const ProductList = () => {
     const { searchTerm } = useSearch()
@@ -20,14 +20,12 @@ const ProductList = () => {
 
     const limit = 40
     const itemsPerRow = 5
-    const estimatedItemHeight = 280 // Estimated height per item for calculations
-    const rowHeight = estimatedItemHeight // Height per row
+    const rowHeight = 280 // Height per row
     const overscan = 5 // Extra rows to render outside viewport
 
     const loadingRef = useRef(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const scrollElementRef = useRef<HTMLDivElement>(null)
-    const itemHeightsRef = useRef<Map<number, number>>(new Map())
 
     const fetchProductData = useCallback(
         async (offset: number, direction: 'up' | 'down' | 'initial' = 'down') => {
